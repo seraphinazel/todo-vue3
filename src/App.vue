@@ -1,6 +1,6 @@
 <template>
 <div class="wrapper">
-  <header>ToDo list</header>
+  <header @click="$router.push('/')">ToDo list</header>
   <router-view class="content"></router-view>
 </div>
 </template>
@@ -36,5 +36,6 @@ header {
   padding: 15px;
   border-radius: 10px;
   margin: 15px 0;
+  cursor: pointer;
 }
 </style>

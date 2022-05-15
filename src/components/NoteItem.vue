@@ -1,9 +1,7 @@
 <template>
   <div class="note-item">
     <my-dialog v-model:show="isModalShown">
-      Do you want to delete note ID:{{note.id}}?
-      <br>
-      <br>
+      <div style="margin: 15px 0;">Do you want to delete note ID:{{note.id}}?</div>
       <my-button @click="deleteNote(note.id)">
         Confirm
       </my-button>

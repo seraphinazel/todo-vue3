@@ -57,6 +57,9 @@ export default createStore({
       const index = state.notes.indexOf(state.notes.find((elem) => elem.id === id));
       state.notes.splice(index, 1);
     },
+    addNote(state, note) {
+      state.notes.push(note);
+    },
   },
   actions: {
   },

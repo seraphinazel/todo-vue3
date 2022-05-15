@@ -1,5 +1,5 @@
 <template>
-  <div class="notes">
+  <div>
     <note-item v-for="note in notes" :key=note.id :note="note" />
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <my-button>Create note</my-button>
+    <my-button @click="$router.push('/notes/new')">Create note</my-button>
     <note-list :notes="notes"/>
   </div>
 </template>
@@ -21,7 +21,3 @@ export default {
   },
 };
 </script>
-
-<style>
-
-</style>

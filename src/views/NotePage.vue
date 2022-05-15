@@ -3,7 +3,7 @@
     <router-link to="/">Home</router-link>
     <div class="note-title">
       <p> Id: {{note.id}} </p>
-      <p> Note title: {{note.title}} </p>
+      <input type="text" v-model="note.title"/>
     </div>
     <div class="note-todo">
       <div v-for="item in note.todo" :key="item.id">
@@ -31,3 +31,7 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+</style>

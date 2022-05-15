@@ -40,7 +40,7 @@ export default {
   left: 0;
   background-color: rgba(0, 0, 0, 0.3);
   position: fixed;
-  display: flex; /**для отцентровки контента посередине */
+  display: flex;
 }
 .modal-content {
   padding: 25px;
@@ -48,6 +48,7 @@ export default {
   background-color: antiquewhite;
   border-radius: 10px;
   min-height: 100px;
+  max-height: 1000px;
   min-width: 300px;
   position: relative;
   display: flex;

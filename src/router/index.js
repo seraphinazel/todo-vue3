@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '@/views/Home.vue';
 import NotePage from '@/views/NotePage.vue';
-import NewNotePage from '@/views/NewNotePage.vue';
 
 const routes = [
   {
@@ -11,10 +10,6 @@ const routes = [
   {
     path: '/notes/:id',
     component: NotePage,
-  },
-  {
-    path: '/notes/new',
-    component: NewNotePage,
   },
 ];
 

@@ -2,30 +2,41 @@
   <div class="note-page">
     <router-link to="/">Home</router-link>
     <h3 v-if="note.id">Edit note id: {{note.id}}</h3>
-    <h3 v-else>Creating new note</h3>
+    <h3 v-else>Create new note</h3>
     <div class="note-title">
-      <p> Id: {{note.id}} </p>
       <input class="input" type="text" placeholder="Note title" v-model="noteTitle">
     </div>
     <div class="note-todo">
-      <input class="input" type="text" placeholder="Note todo" v-model="todoContent">
-      <my-button
-        style="align-self: flex-start;"
-        @click="addTodo"
-      >
-        Add todo
-      </my-button>
+      <div>
+        <input class="input" type="text" placeholder="Note todo" v-model="todoContent">
+        <my-button @click="addTodo">Add todo</my-button>
+      </div>
       <div v-for="(item, index) in noteTodo" :key="item.id" class="new-note-list">
-        <input type="checkbox" :id="item.id" v-model="item.checked">
-        <label :for="item.id">
-          <input class="input" type="text" placeholder="Note todo" v-model="item.content">
-        </label>
+        <div>
+          <input type="checkbox" :id="item.id" v-model="item.checked">
+          <label :for="item.id">
+            <input class="input" type="text" placeholder="Note todo" v-model="item.content">
+          </label>
+        </div>
         <my-button @click="deleteTodo(index)" style="border:none;">
           <img src="@/assets/delete_icon.svg" alt="delete_icon"/>
         </my-button>
       </div>
     </div>
-    <my-button style="align-self: flex-end;" @click="saveNote">Save</my-button>
+    <my-button
+      v-if="note.id"
+      style="align-self: flex-end;"
+      @click="saveNote(note.id)"
+    >
+      Save
+    </my-button>
+    <my-button
+      v-else
+      style="align-self: flex-end;"
+      @click="saveNewNote"
+    >
+      Save
+    </my-button>
   </div>
 </template>
 
@@ -65,7 +76,7 @@ export default {
     deleteTodo(index) {
       this.noteTodo.splice(index, 1);
     },
-    saveNote() {
+    saveNewNote() {
       if (this.noteTitle !== '' && this.noteTodo.length > 0) {
         const newNote = {
           id: Date.now(),
@@ -77,6 +88,8 @@ export default {
         this.noteTodo = [];
         this.$router.push('/');
       }
+    },
+    saveNote() {
     },
   },
   created() {

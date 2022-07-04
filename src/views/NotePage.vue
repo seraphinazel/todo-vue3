@@ -41,7 +41,9 @@
 </template>
 
 <script>
+import axios from 'axios';
 import MyButton from '@/components/UI/MyButton.vue';
+import { API_BASE_URL } from '@/config';
 
 export default {
   components: { MyButton },
@@ -52,6 +54,8 @@ export default {
       noteTitle: '',
       noteTodo: [],
       todoContent: '',
+      isLoading: false,
+      isLoadingFailed: false,
     };
   },
   methods: {
@@ -77,19 +81,40 @@ export default {
       this.noteTodo.splice(index, 1);
     },
     saveNewNote() {
+      this.isLoading = true;
       if (this.noteTitle !== '' && this.noteTodo.length > 0) {
         const newNote = {
           id: Date.now(),
           title: this.noteTitle,
           todo: this.noteTodo,
         };
-        this.$store.commit('addNote', newNote);
-        this.noteTitle = '';
-        this.noteTodo = [];
-        this.$router.push('/');
+        axios
+          .post(`${API_BASE_URL}/notes`, newNote)
+          .then(() => {
+            this.noteTitle = '';
+            this.noteTodo = [];
+            this.isLoading = false;
+            this.$router.push('/');
+          })
+          .catch(() => { this.isLoadingFailed = true; });
       }
     },
-    saveNote() {
+    saveNote(id) {
+      this.isLoading = true;
+      if (this.noteTitle !== '' && this.noteTodo.length > 0) {
+        axios
+          .put(`${API_BASE_URL}/notes/${id}`, {
+            title: this.noteTitle,
+            todo: this.noteTodo,
+          })
+          .then(() => {
+            this.noteTitle = '';
+            this.noteTodo = [];
+            this.isLoading = false;
+            this.$router.push('/');
+          })
+          .catch(() => { this.isLoadingFailed = true; });
+      }
     },
   },
   created() {
